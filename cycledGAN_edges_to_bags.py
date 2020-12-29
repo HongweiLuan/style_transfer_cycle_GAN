@@ -3,7 +3,8 @@ import tensorflow as tf
 import numpy as np
 import os
 import time
-from scipy.misc import imread, imresize, imsave
+from matplotlib.pyplot import imread, imsave
+from PIL import Image
 import copy
 import fire
 from elapsedtimer import ElapsedTimer
@@ -14,16 +15,18 @@ def load_train_data(image_path, load_size=64, fine_size=64, is_testing=False):
     img_B = imread(image_path[1])
 
     if not is_testing:
-        img_A = imresize(img_A, [load_size, load_size])
-        img_B = imresize(img_B, [load_size, load_size])
+        img_A = Image.fromarray(img_A).resize(size=(load_size, load_size))
+        img_B = Image.fromarray(img_B).resize(size=(load_size, load_size))
 
         if np.random.random() > 0.5:
             img_A = np.fliplr(img_A)
             img_B = np.fliplr(img_B)
     else:
-        img_A = imresize(img_A, [fine_size, fine_size])
-        img_B = imresize(img_B, [fine_size, fine_size])
+        img_A = Image.fromarray(img_A).resize(size=(fine_size, fine_size))
+        img_B = Image.fromarray(img_B).resize(size=(fine_size, fine_size))
 
+    img_A = np.array(img_A)
+    img_B = np.array(img_B)
     img_A = img_A / 127.5 - 1
     img_B = img_B / 127.5 - 1
 
@@ -434,7 +437,6 @@ class DiscoGAN():
         self.init_op = tf.global_variables_initializer()
         self.sess = tf.Session()
         self.sess.run(self.init_op)
-        # self.dataset_dir = '/home/santanu/Downloads/DiscoGAN/edges2handbags/train/'
         self.writer = tf.summary.FileWriter("./logs", self.sess.graph)
         count = 1
         start_time = time.time()

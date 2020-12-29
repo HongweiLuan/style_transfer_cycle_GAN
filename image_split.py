@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 """
 Created on Dec 28, 2020
-@author: Hongwei
+@author: hluan
 """
 
 import os
-from scipy.misc import imread
-from scipy.misc import imsave
+from matplotlib.pyplot import imread, imsave
 import fire
 from elapsedtimer import ElapsedTimer
 from pathlib import Path

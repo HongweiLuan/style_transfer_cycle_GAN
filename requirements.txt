@@ -1,0 +1,6 @@
+fire
+elapsedtimer
+Pillow
+tensorflow
+numpy
+matplotlib
