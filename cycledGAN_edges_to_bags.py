@@ -47,7 +47,8 @@ def merge(images, size):
 
 
 def image_save(images, size, path):
-    return imsave(path, merge(images, size))
+    x = merge(images, size)
+    imsave(path, x / np.linalg.norm(x))
 
 
 def save_images(images, size, image_path):

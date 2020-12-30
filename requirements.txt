@@ -1,6 +1,6 @@
 fire
 elapsedtimer
 Pillow
-tensorflow
+tensorflow==1.14.0
 numpy
 matplotlib
